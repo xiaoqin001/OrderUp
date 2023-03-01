@@ -7,7 +7,7 @@ from ..models import Employee
 
 bp = Blueprint("employee", __name__, url_prefix="/employee")
 
-@bp.route('/', methods=["GET"])
+@bp.route('/', methods=["POST"])
 def get_employees():
     employees = Employee.query.all()
     res = []

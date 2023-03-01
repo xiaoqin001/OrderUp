@@ -9,4 +9,5 @@ bp = Blueprint("table", __name__, url_prefix="/table")
 @bp.route('/', methods=["GET"])
 def get_tables():
     tables = Table.query.all()
-    return jsonify([table.__dict__ for table in tables])
+
+    return [table.__dict__['number'] for table in tables]

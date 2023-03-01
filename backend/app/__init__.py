@@ -1,16 +1,22 @@
 from flask import Flask
 from .config import Configuration
-from .routes import employee, table
+from .routes import employee, table, asigntable, order
 from .models import db, Employee
 from flask_login import LoginManager
+from flask_cors import *
+
 
 app = Flask(__name__)
+CORS(app, supports_credentials=True)
+
+
 
 app.config.from_object(Configuration)
-# app.register_blueprint(orders.bp)
-# app.register_blueprint(session.bp)
 app.register_blueprint(employee.bp)
 app.register_blueprint(table.bp)
+# app.register_blueprint(asigntable.bp)
+app.register_blueprint(order.bp)
+
 
 
 db.init_app(app)

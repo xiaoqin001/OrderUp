@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import OpenOrders from './OpenOrders';
 import {  Button, Form, Input, Select, Row, Col  } from 'antd';
 const { Option } = Select;
 
@@ -26,12 +27,12 @@ function AsignTable() {
     };
 
     useEffect(() => {
-      axios.get('/api/table')
+      axios.get('/table')
         .then((response) => {
-          console.log(response)
-          const options = response.data.map(table => ({
-            value: table.id,
-            label: `Table ${table.number}`
+          // console.log(response)
+          const options = response.data.map(number => ({
+            value: number,
+            label: `Table ${number}`
           }));
           setTableOptions(options);
         })
@@ -39,24 +40,33 @@ function AsignTable() {
           console.log(error);
         });
 
-      axios.get('/api/employee')
+      axios.get('/employee')
         .then((response) => {
           const options = response.data.map(employee => ({
             value: employee.id,
             label: employee.name
           }));
           setEmployeeOptions(options);
+          // console.log(employeeOptions)
         })
         .catch((error) => {
           console.log(error);
         });
     }, []);
 
+    // console.log(employeeOptions)
+    // console.log(selectedEmployee)
+
+
     const handleSubmit = (event) => {
       event.preventDefault();
-      axios.post('/orders', {
+      axios.post('/order', {
         table_id: selectedTable,
         employee_id: selectedEmployee
+      },{
+        headers: {
+          'Content-Type': 'application/json'
+        }
       })
       .then((response) => {
         console.log(response);
@@ -67,6 +77,7 @@ function AsignTable() {
     }
 
     return (
+      <div>
       <Form
         // {...layout}
 
@@ -92,11 +103,10 @@ function AsignTable() {
         >
           <Select
             placeholder="Select a table"
-            // onChange={onGenderChange}
             allowClear
-            value={selectedTable} onChange={(event) => setSelectedTable(event.target.value)} required
+            onChange={(e) => setSelectedTable(e)}
           >
-            <Option value="">Please select a table</Option>
+            <Select.Option value='select' >Please select a table</Select.Option>
             {tableOptions.map(option => (
             <option key={option.value} value={option.value}>{option.label}</option>
           ))}
@@ -106,22 +116,13 @@ function AsignTable() {
         </Col>
 
         <Col>
-        <Form.Item
-          name="employee"
-          label="Server"
-          rules={[
-            {
-              required: true,
-            },
-          ]}
-        >
+        <Form.Item name="employee" label="Server" rules={[{ required: true,},]}>
           <Select
             placeholder="Select a server"
-            // onChange={onGenderChange}
-            allowClear
-            value={selectedEmployee} onChange={(event) => setSelectedEmployee(event.target.value)} required
+            value={selectedEmployee}
+            onChange={(e) => {setSelectedEmployee(e)}}
           >
-            <Option value="">Please select a server</Option>
+            <Select.Option value='select' >Please select a server</Select.Option>
             {employeeOptions.map(option => (
             <option key={option.value} value={option.value}>{option.label}</option>
           ))}
@@ -133,7 +134,7 @@ function AsignTable() {
 
         <Col>
         <Form.Item >
-          <Button type="primary" htmlType="submit">
+          <Button type="primary" htmlType="submit" onClick={handleSubmit}>
             Submit
           </Button>
         </Form.Item>
@@ -141,6 +142,8 @@ function AsignTable() {
 
         </Row>
       </Form>
+      <OpenOrders />
+      </div>
 
     );
 
