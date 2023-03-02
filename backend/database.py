@@ -22,7 +22,9 @@ with app.app_context():
     dinner = Menu(name="Dinner")
 
     fries = MenuItem(name="French fries", price=3.50, type=sides, menu=dinner)
+    sp = MenuItem(name="Sweet Potato", price=4.50, type=sides, menu=dinner)
     drp = MenuItem(name="Dr. Pepper", price=1.0, type=beverages, menu=dinner)
+    cola = MenuItem(name="Coco Cola", price=3.0, type=beverages, menu=dinner)
     jambalaya = MenuItem(name="Jambalaya", price=21.98, type=entrees, menu=dinner)
 
     table_1 = Table(number=1, capacity=2)

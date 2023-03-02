@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import {  Avatar, Button, List, Skeleton  } from 'antd';
+import Menu from './Menu';
 
 
 
@@ -9,6 +10,7 @@ function OpenOrders(props) {
     const [data, setData] = useState([]);
     const [list, setList] = useState([]);
 
+    console.log(props)
 
     useEffect(() => {
         axios.get('/order')
@@ -77,7 +79,6 @@ function OpenOrders(props) {
                 </List.Item>
           )}
       />
-
       </div>
     )
 }

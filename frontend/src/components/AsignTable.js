@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import OpenOrders from './OpenOrders';
+import Menu from './Menu';
 import {  Button, Form, Input, Select, Row, Col  } from 'antd';
 const { Option } = Select;
 
@@ -85,6 +86,7 @@ function AsignTable() {
 
     return (
       <div>
+      <p>Asign Table</p>
       <Form
         // {...layout}
 
@@ -149,7 +151,8 @@ function AsignTable() {
 
         </Row>
       </Form>
-      <OpenOrders refresh={reFresh}/>
+
+      <Menu />
       </div>
 
     );

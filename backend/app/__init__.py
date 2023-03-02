@@ -1,6 +1,6 @@
 from flask import Flask
 from .config import Configuration
-from .routes import employee, table, asigntable, order
+from .routes import employee, table, asigntable, order, menu
 from .models import db, Employee
 from flask_login import LoginManager
 from flask_cors import *
@@ -16,7 +16,7 @@ app.register_blueprint(employee.bp)
 app.register_blueprint(table.bp)
 # app.register_blueprint(asigntable.bp)
 app.register_blueprint(order.bp)
-
+app.register_blueprint(menu.bp)
 
 
 db.init_app(app)
