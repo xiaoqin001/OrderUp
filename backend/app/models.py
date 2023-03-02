@@ -50,6 +50,7 @@ class MenuItem(db.Model):
 
     menu = db.relationship("Menu", back_populates="menuitems")
     type = db.relationship("MenuItemType", back_populates="menuitems")
+    details = db.relationship("OrderDetail", back_populates="menuitems")
 
 class MenuItemType(db.Model):
     __tablename__ = "menu_item_types"
@@ -85,6 +86,7 @@ class OrderDetail(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     order_id = db.Column(db.Integer, db.ForeignKey("orders.id"), nullable=False)
-    menu_item_id = db.Column(db.Integer, db.ForeignKey("menu_items.id"), nullable=False)
+    menu_item_id = db.Column(db.Integer, db.ForeignKey("menu_items.id"))
 
     order = db.relationship("Order", back_populates="details")
+    menuitems = db.relationship("MenuItem", back_populates="details")
