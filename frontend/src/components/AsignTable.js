@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import OpenOrders from './OpenOrders';
 import Menu from './Menu';
+import './components.css';
 import {  Button, Form, Input, Select, Row, Col  } from 'antd';
 const { Option } = Select;
 
@@ -68,7 +69,7 @@ function AsignTable() {
       }
       event.preventDefault();
 
-      await axios.post('/order', {
+      await axios.post('/opentable', {
         table_id: selectedTable,
         employee_id: selectedEmployee
       },{
@@ -86,8 +87,11 @@ function AsignTable() {
 
     return (
       <div>
-      <p>Asign Table</p>
-      <Form
+        <div className='AsignBar'>
+          <div className='AsignBarLine'>
+            <p className='AsignText'>Asign Table</p>
+            <div className='AsignTable'>
+            <Form
         // {...layout}
 
         // form={form}
@@ -125,7 +129,7 @@ function AsignTable() {
         </Col>
 
         <Col>
-        <Form.Item name="employee" label="Server" rules={[{ required: true,},]}>
+        <Form.Item className='Server' name="employee" label="Server" rules={[{ required: true,},]}>
           <Select
             placeholder="Select a server"
             value={selectedEmployee}
@@ -143,7 +147,7 @@ function AsignTable() {
 
         <Col>
         <Form.Item >
-          <Button type="primary" htmlType="submit" onClick={handleSubmit}>
+          <Button className='submit' type="primary" htmlType="submit" onClick={handleSubmit}>
             Submit
           </Button>
         </Form.Item>
@@ -151,7 +155,9 @@ function AsignTable() {
 
         </Row>
       </Form>
-
+      </div>
+      </div>
+      </div>
       <Menu />
       </div>
 

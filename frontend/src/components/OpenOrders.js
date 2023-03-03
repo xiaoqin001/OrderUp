@@ -9,22 +9,27 @@ import Menu from './Menu';
 function OpenOrders(props) {
     const [data, setData] = useState([]);
     const [list, setList] = useState([]);
-
-    console.log(props)
+    // const [list, setList] = useState({
+    //     table_id: 0,
+    //     order_id: 0,
+    //     price: 0
+    // });
 
     useEffect(() => {
         axios.get('/order')
         .then((response)=>{
-            console.log(response.data)
             setData(response.data);
             setList(response.data);
+            console.log(response)
+            // console.log(response.data[0]['table_id'])
         })
         .catch((error)=>{
             console.log(error)
         });
     },[]);
 
-
+    // console.log(data)
+    // console.log(list)
     const handleClose = async (orderId) => {
         // event.preventDefault();
         console.log('submit')
@@ -40,18 +45,41 @@ function OpenOrders(props) {
         })
         .then((response)=>{
             console.log(response)
+            // list.price = response.price
+            // let test={...list}
+            // setList(test)
         })
         .catch((error)=>{
             console.log(error)
         });
     }
-    const handleOrder = () => {}
+
+    const handleOrder = (orderId) => {
+        console.log(props.data)
+        axios.post('/order', {
+            data:{
+                items: props.data,
+                order_id: orderId
+            }
+        }, {
+            headers: {
+                'Content-Type': 'application/json'
+              }
+        })
+        .then((response)=>{
+            console.log(response)
+        })
+        .catch((error)=>{
+            console.log(error)
+        })
+    }
 
     return(
-        <div>
-        <p>order list</p>
+        <div className='OrderList'>
+        <p className='Title'>Order List</p>
         <List
             itemLayout="horizontal"
+            className='List'
         // size="large"
         // pagination={{
         //   onChange: (page) => {
@@ -71,7 +99,7 @@ function OpenOrders(props) {
                 // <List.Item actions={[<Button onClick={handleClose}>CLOSE TABLE</Button>]}>
                 <List.Item>
                     <div>{`Table ${item.table_id}`}</div>
-                    <div>price</div>
+                    <div>{`$ ${item.price}`}</div>
                     <div className='testButton'>
                         <Button onClick={(e)=>{handleClose(item.order_id)}}>CLOSE TABLE</Button>
                     </div>

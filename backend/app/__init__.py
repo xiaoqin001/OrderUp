@@ -17,6 +17,7 @@ app.register_blueprint(table.bp)
 # app.register_blueprint(asigntable.bp)
 app.register_blueprint(order.bp)
 app.register_blueprint(menu.bp)
+app.register_blueprint(asigntable.bp)
 
 
 db.init_app(app)

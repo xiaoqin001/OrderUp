@@ -1,3 +1,90 @@
-.testButton{
+.testButton {
     color:gray
+}
+
+
+/* .AsignBar {
+    display: flex;
+    margin: 0 auto;
+    margin-left: 50 px;
+} */
+
+.AsignBarLine {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.AsignBar .AsignBarLine .AsignText {
+    Font: 'Sans-serif';
+    font-weight: bolder;
+    color: darkgrey;
+}
+
+.AsignBar .AsignBarLine .AsignTable {
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.AsignBar .AsignBarLine .AsignTable .Server {
+    margin-left: 5px;
+}
+
+.AsignBar .AsignBarLine .AsignTable .submit {
+    margin-left: 50px;
+}
+
+.ParentChild {
+    display: flex;
+    justify-content: space-between
+    /* align-content: space-between */
+}
+
+
+.ParentChild .Menu {
+    margin-left: 200px;
+}
+
+.ParentChild .Menu .MenuType1 .MenuTitle1 {
+    Font: 'Sans-serif';
+    font-weight: bolder;
+    color: darkgrey;
+}
+
+.ParentChild .Menu .MenuType2 {
+    margin-top: 50px;
+}
+
+.ParentChild .Menu .MenuType2 .MenuTitle2 {
+    Font: 'Sans-serif';
+    font-weight: bolder;
+    color: darkgrey;
+}
+
+.ParentChild .Menu .MenuType3 {
+    margin-top: 50px;
+}
+
+.ParentChild .Menu .MenuType3 .MenuTitle3 {
+    Font: 'Sans-serif';
+    font-weight: bolder;
+    color: darkgrey;
+}
+
+.ParentChild .Menu .MenuButton {
+    margin-top: 50px;
+}
+
+
+
+
+.OrderList {
+    width: 65%;
+    margin-left: 50px
+}
+
+.OrderList .Title {
+    Font: 'Sans-serif';
+    font-weight: bolder;
+    color: darkgrey;
 }

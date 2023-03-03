@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import OpenOrders from './OpenOrders';
 import {  Button, Checkbox, Input, Select, Row, Col  } from 'antd';
+import './components.css';
 const { Option } = Select;
 
 
@@ -12,7 +13,9 @@ function Menu() {
   const [items, setItems] = useState([])
 
 
-  const handleSubmit = () => {}
+  const handleSubmit = () => {
+    setItems([])
+  }
 
   useEffect( () => {
     axios.get('/menu')
@@ -27,7 +30,7 @@ function Menu() {
     })
   },[])
 
-  console.log(beverages)
+  // console.log(beverages)
 
   const onChange = (checkedValues) => {
     let item_list;
@@ -36,24 +39,28 @@ function Menu() {
     setItems(item_list);
     console.log(items)
   }
-  console.log(items)
+  // console.log(items)
 
   return (
-    <div>
-      <Button onClick={handleSubmit}>submit</Button>
-      <div>
-        <p>Entrees</p>
-        <Checkbox.Group options={beverages} onChange={onChange} />
+    <div className='ParentChild'>
+      <div className='Menu'>
+        <div className='MenuType1'>
+          <p className='MenuTitle1'>Entrees</p>
+          <Checkbox.Group options={entrees} onChange={onChange} />
+        </div>
+        <div className='MenuType2'>
+          <p className='MenuTitle2'>Sides</p>
+          <Checkbox.Group options={sides} onChange={onChange} />
+        </div>
+        <div className='MenuType3'>
+          <p className='MenuTitle3'>Beverages</p>
+          <Checkbox.Group options={beverages} onChange={onChange} />
+        </div>
+        <Button className='MenuButton' onClick={handleSubmit}>Reset</Button>
       </div>
-      <div>
-        <p>Sides</p>
-        <Checkbox.Group options={sides} onChange={onChange} />
+      <div className='OrderList'>
+        <OpenOrders data={items}/>
       </div>
-      <div>
-        <p>Beverages</p>
-        <Checkbox.Group options={entrees} onChange={onChange} />
-      </div>
-      <OpenOrders data={items}/>
     </div>
   )
 
